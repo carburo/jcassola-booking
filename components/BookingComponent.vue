@@ -11,8 +11,13 @@ export default {
   data() {
     return {
       bookingInfo: {
-        selectedFlightType: 'one-way',
+        selectedFlightType: 'round-trip',
+        passengers: 0,
         selectedTravelClass: 'economy',
+        origin: '',
+        destiny: '',
+        departureDate: '',
+        returnDate: '',
       },
     }
   },

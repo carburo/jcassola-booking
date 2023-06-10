@@ -76,8 +76,6 @@ export default {
   data() {
     return {
       showPassengerOptions: false,
-      // selectedFlightType: 'one-way',
-      // selectedTravelClass: 'economy',
       flightTypes: [
         { name: 'One Way', value: 'one-way' },
         { name: 'Round Trip', value: 'round-trip' },
@@ -112,7 +110,6 @@ export default {
       })
       return totalPassengers
     },
-
     bookingInfo: {
       get() {
         return this.value
@@ -120,6 +117,12 @@ export default {
       set(val) {
         this.$emit('input', val)
       },
+    },
+  },
+
+  watch: {
+    totalPassengers(val) {
+      this.bookingInfo.passengers = val
     },
   },
   methods: {
@@ -133,14 +136,6 @@ export default {
       this.showPassengerOptions = !this.showPassengerOptions
     },
   },
-  // mounted() {
-  //   // Agregar detector de clics al div de opciones
-  //   document.addEventListener('click', (event) => {
-  //     if (!this.$refs.passengersOptions.contains(event.target)) {
-  //       this.showPassengerOptions = false
-  //     }
-  //   })
-  // },
 }
 </script>
 

@@ -6,6 +6,7 @@
           <span class="input-group-text"><i class="fas fa-plane"></i></span>
         </div>
         <input
+          v-model="bookingInfo.origin"
           type="text"
           class="form-control"
           id="origin"
@@ -25,6 +26,7 @@
         </div>
         <input
           type="text"
+          v-model="bookingInfo.destiny"
           class="form-control"
           id="destiny"
           placeholder="To ?"
@@ -40,7 +42,12 @@
               ><i class="fas fa-calendar"></i
             ></span>
           </div>
-          <input type="date" class="form-control" id="departure-date" />
+          <input
+            type="date"
+            v-model="bookingInfo.departureDate"
+            class="form-control"
+            id="departure-date"
+          />
         </div>
         <span
           v-if="!(bookingInfo.selectedFlightType === 'one-way')"
@@ -55,7 +62,12 @@
               ><i class="fas fa-calendar"></i
             ></span>
           </div>
-          <input type="date" class="form-control" id="return-date" />
+          <input
+            v-model="bookingInfo.returnDate"
+            type="date"
+            class="form-control"
+            id="return-date"
+          />
         </div>
       </div>
     </div>
@@ -81,6 +93,10 @@ export default {
     bookingInfo: {
       get() {
         return this.value
+      },
+      set(val) {
+        console.log(val)
+        this.$emit('input', val)
       },
     },
   },
