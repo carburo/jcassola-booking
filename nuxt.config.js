@@ -4,6 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
+    // script: [{ src: 'https://unpkg.com/v-calendar' }],
     title: 'booking',
     htmlAttrs: {
       lang: 'en',

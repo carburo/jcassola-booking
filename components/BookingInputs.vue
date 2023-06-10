@@ -42,9 +42,12 @@
           </div>
           <input type="date" class="form-control" id="departure-date" />
         </div>
-        <span class="separator"></span>
+        <span
+          v-if="!(bookingInfo.selectedFlightType === 'one-way')"
+          class="separator"
+        ></span>
         <div
-          v-if="!(fligtType === 'one-way')"
+          v-if="!(bookingInfo.selectedFlightType === 'one-way')"
           class="input-group date return-date"
         >
           <div class="input-group-prepend">
@@ -68,6 +71,19 @@
 <script>
 export default {
   name: 'BookingInputs',
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  computed: {
+    bookingInfo: {
+      get() {
+        return this.value
+      },
+    },
+  },
 }
 </script>
 

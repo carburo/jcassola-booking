@@ -2,13 +2,17 @@
   <div>
     <h1>Search hundred of travel sites at once.</h1>
     <div class="selects-container mb-3">
-      <select v-model="selectedFlightType" name="fligt-type" id="flight-type">
+      <select
+        v-model="bookingInfo.selectedFlightType"
+        name="fligt-type"
+        id="flight-type"
+      >
         <option
-          v-for="fligtType in flightTypes"
-          :key="fligtType.name"
-          :value="fligtType.value"
+          v-for="flightType in flightTypes"
+          :key="flightType.name"
+          :value="flightType.value"
         >
-          {{ fligtType.name }}
+          {{ flightType.name }}
         </option>
       </select>
       <div class="passengers-container">
@@ -43,7 +47,11 @@
           </div>
         </div>
       </div>
-      <select v-model="selectedTravelClass" name="travelClass" id="travelClass">
+      <select
+        v-model="bookingInfo.selectedTravelClass"
+        name="travelClass"
+        id="travelClass"
+      >
         <option
           v-for="travelClass in travelClasses"
           :key="travelClass.name"
@@ -59,11 +67,17 @@
 <script>
 export default {
   name: 'BookingSelects',
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       showPassengerOptions: false,
-      selectedFlightType: 'one-way',
-      selectedTravelClass: 'economy',
+      // selectedFlightType: 'one-way',
+      // selectedTravelClass: 'economy',
       flightTypes: [
         { name: 'One Way', value: 'one-way' },
         { name: 'Round Trip', value: 'round-trip' },
@@ -96,8 +110,16 @@ export default {
       this.passengers.forEach((passenger) => {
         totalPassengers += passenger.value
       })
-
       return totalPassengers
+    },
+
+    bookingInfo: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        this.$emit('input', val)
+      },
     },
   },
   methods: {
@@ -111,6 +133,14 @@ export default {
       this.showPassengerOptions = !this.showPassengerOptions
     },
   },
+  // mounted() {
+  //   // Agregar detector de clics al div de opciones
+  //   document.addEventListener('click', (event) => {
+  //     if (!this.$refs.passengersOptions.contains(event.target)) {
+  //       this.showPassengerOptions = false
+  //     }
+  //   })
+  // },
 }
 </script>
 
