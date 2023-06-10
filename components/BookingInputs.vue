@@ -137,12 +137,10 @@ input {
 .search-button-container {
   width: 5%;
   height: 51px;
-  padding: 0;
   button {
     background: linear-gradient(135deg, #ff690f 0%, #e8381b 100%);
     border-radius: 10px;
     color: white;
-    width: 100%;
   }
 }
 
