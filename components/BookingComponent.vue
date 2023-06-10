@@ -1,11 +1,11 @@
 <template>
-  <BookingComponent />
+  <h1>Booking</h1>
 </template>
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'BookingComponent',
 }
 </script>
 
-BookingComponent
+<style></style>
