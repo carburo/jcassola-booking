@@ -2,11 +2,14 @@
   <div>
     <h1>Search hundred of travel sites at once.</h1>
     <div class="selects-container mb-3">
-      <select v-model="fligtType" name="fligt-type" id="flight-type">
-        <option selected="selected" value="one-way">One Way</option>
-        <option value="round-trip">Round Trip</option>
-        <option value="multi-city">Multi City</option>
-        <option value="trip-builder">Trip Builder</option>
+      <select v-model="selectedFlightType" name="fligt-type" id="flight-type">
+        <option
+          v-for="fligtType in flightTypes"
+          :key="fligtType.name"
+          :value="fligtType.value"
+        >
+          {{ fligtType.name }}
+        </option>
       </select>
       <div class="passengers-container">
         <button
@@ -16,6 +19,10 @@
           id="passengers"
         >
           {{ totalPassengers }} travelers
+          <i
+            style="font-size: 0.9em"
+            class="fas fa-chevron-down float-right"
+          ></i>
         </button>
         <div v-if="showPassengerOptions" class="passengers-options">
           <div
@@ -36,12 +43,14 @@
           </div>
         </div>
       </div>
-      <select v-model="travelClass" name="travelClass" id="travelClass">
-        <option selected="selected" value="economy">Economy</option>
-        <option value="premium-economy">Premium Economy</option>
-        <option value="business">Business</option>
-        <option value="first">Fist</option>
-        <option value="multiple">Multiple</option>
+      <select v-model="selectedTravelClass" name="travelClass" id="travelClass">
+        <option
+          v-for="travelClass in travelClasses"
+          :key="travelClass.name"
+          :value="travelClass.value"
+        >
+          {{ travelClass.name }}
+        </option>
       </select>
     </div>
   </div>
@@ -53,8 +62,22 @@ export default {
   data() {
     return {
       showPassengerOptions: false,
-      fligtType: 'one-way',
-      travelClass: 'economy',
+      selectedFlightType: 'one-way',
+      selectedTravelClass: 'economy',
+      flightTypes: [
+        { name: 'One Way', value: 'one-way' },
+        { name: 'Round Trip', value: 'round-trip' },
+        { name: 'Multi City', value: 'multi-city' },
+        { name: 'Trip Builder', value: 'trip-builder' },
+      ],
+      travelClasses: [
+        { name: 'Economy', value: 'economy' },
+        { name: 'Premium Economy', value: 'premium-economy' },
+        { name: 'Business', value: 'business' },
+        { name: 'First', value: 'first' },
+        { name: 'Multiple', value: 'multiple' },
+      ],
+
       passengers: [
         { name: 'Adults', spam: '18-64', value: 1 },
         { name: 'Students', spam: 'over 18', value: 0 },
@@ -104,6 +127,7 @@ export default {
   display: relative;
 
   .passengers-button {
+    background: transparent;
     padding: 10px;
     border: 0;
   }

@@ -42,6 +42,7 @@
           </div>
           <input type="date" class="form-control" id="departure-date" />
         </div>
+        <span class="separator"></span>
         <div
           v-if="!(fligtType === 'one-way')"
           class="input-group date return-date"
@@ -71,13 +72,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search {
-  button {
-    color: #fff;
-    background: linear-gradient(135deg, #ff690f 0%, #e8381b 100%);
-  }
-}
-
 .input-group-text {
   height: 100%;
   border: none;
@@ -85,6 +79,7 @@ export default {
   border-bottom-left-radius: 8px;
 }
 input {
+  padding: 15px 0;
   background-color: #e9ecef;
   border: 0;
   border-top-right-radius: 8px;
@@ -96,7 +91,7 @@ input {
   }
 }
 .input-group:focus-within {
-  border: 1px solid black;
+  outline: 1px solid black;
   border-radius: 8px;
 }
 .input-group:hover {
@@ -122,6 +117,9 @@ input {
 .dates-container {
   width: 45%;
   gap: 10px;
+  .separator {
+    border: 2px solid #b9bbbd;
+  }
 }
 .dates .date {
   flex-basis: 43%;
@@ -134,14 +132,17 @@ input {
 .return-date .input-group-text {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  border-left: 1px solid #9d9d9d;
 }
 
 .search-button-container {
   width: 5%;
-  height: 48px;
+  height: 51px;
+  padding: 0;
   button {
     background: linear-gradient(135deg, #ff690f 0%, #e8381b 100%);
+    border-radius: 10px;
+    color: white;
+    width: 100%;
   }
 }
 
@@ -161,6 +162,9 @@ input {
   }
   .date {
     margin-bottom: 5px !important;
+  }
+  .separator {
+    display: none;
   }
   .switcher {
     position: absolute;
