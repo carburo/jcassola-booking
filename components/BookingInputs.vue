@@ -1,6 +1,6 @@
 <template>
   <div class="row travel-inputs w-100">
-    <div class="d-flex origin-and-destiny-container mb-2">
+    <div class="origin-and-destiny-container d-flex mb-2">
       <div class="input-group origin">
         <div class="input-group-prepend">
           <span class="input-group-text"><i class="fas fa-plane"></i></span>
@@ -8,7 +8,7 @@
         <input
           v-model="bookingInfo.origin"
           type="text"
-          class="form-control"
+          class="form-control input-group__input"
           id="origin"
           placeholder="From ?"
         />
@@ -27,14 +27,14 @@
         <input
           type="text"
           v-model="bookingInfo.destiny"
-          class="form-control"
+          class="form-control input-group__input"
           id="destiny"
           placeholder="To ?"
         />
       </div>
     </div>
 
-    <div class="d-flex dates-container mb-2">
+    <div class="dates-container d-flex mb-2">
       <div class="input-group d-flex dates">
         <div class="input-group date departure-date">
           <div class="input-group-prepend">
@@ -45,7 +45,7 @@
           <input
             type="date"
             v-model="bookingInfo.departureDate"
-            class="form-control"
+            class="form-control input-group__input"
             id="departure-date"
           />
         </div>
@@ -65,7 +65,7 @@
           <input
             v-model="bookingInfo.returnDate"
             type="date"
-            class="form-control"
+            class="form-control input-group__input"
             id="return-date"
           />
         </div>
@@ -110,7 +110,7 @@ export default {
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
 }
-input {
+.input-group__input {
   padding: 15px 0;
   background-color: #e9ecef;
   border: 0;
@@ -127,7 +127,7 @@ input {
   border-radius: 8px;
 }
 .input-group:hover {
-  input,
+  .input-group__input,
   .input-group-text {
     background-color: #d1d2d3;
   }
@@ -189,7 +189,7 @@ input {
     width: 100%;
   }
   .search-button-container {
-    padding: 0 12px;
+    padding: 0;
   }
 }
 @media screen and (max-width: 500px) {
