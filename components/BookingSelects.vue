@@ -227,4 +227,11 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .title {
+    font-size: 24px;
+    text-align: center;
+  }
+}
 </style>

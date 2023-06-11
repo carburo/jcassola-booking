@@ -138,6 +138,9 @@ export default {
   border-radius: 8px;
   &:hover {
     background-color: #d1d2d3;
+    .input-group-text {
+      background-color: #d1d2d3;
+    }
   }
 }
 
@@ -176,6 +179,9 @@ export default {
     color: white;
     width: 100%;
     height: 100%;
+    &:hover {
+      background: linear-gradient(135deg, #d3611b 0%, #e8381b 100%);
+    }
   }
 }
 
@@ -189,7 +195,7 @@ export default {
     width: 100%;
   }
   .search-button-container {
-    padding: 0;
+    padding: 0 12px;
   }
 }
 @media screen and (max-width: 500px) {
