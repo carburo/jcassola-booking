@@ -72,7 +72,7 @@
       </div>
     </div>
 
-    <div class="d-grid d-md-flex search-button-container">
+    <div class="search-button-container">
       <button class="btn me-md-2" type="button">
         <i class="fas fa-search"></i>
       </button>
@@ -169,10 +169,13 @@ input {
 .search-button-container {
   width: 5%;
   height: 51px;
+  padding: 0;
   button {
     background: linear-gradient(135deg, #ff690f 0%, #e8381b 100%);
     border-radius: 10px;
     color: white;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -184,6 +187,9 @@ input {
   .search-button-container,
   .search-button-container button {
     width: 100%;
+  }
+  .search-button-container {
+    padding: 0 12px;
   }
 }
 @media screen and (max-width: 500px) {

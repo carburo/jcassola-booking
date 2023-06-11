@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h1>Search hundred of travel sites at once.</h1>
+    <h1 class="title">Search hundred of travel sites at once.</h1>
     <div class="selects-container mb-3">
       <select
         v-model="bookingInfo.selectedFlightType"
         name="fligt-type"
         id="flight-type"
+        class="select"
       >
         <option
           v-for="flightType in flightTypes"
           :key="flightType.name"
           :value="flightType.value"
+          class="option"
         >
           {{ flightType.name }}
         </option>
@@ -18,11 +20,11 @@
       <div class="passengers-container">
         <button
           class="passengers-button"
-          @click="displayPassengerOptions"
+          @click="togglePassengerOptions"
           name="passengers"
           id="passengers"
         >
-          {{ totalPassengers }} travelers
+          {{ passengersText }}
           <i
             style="font-size: 0.9em"
             class="fas fa-chevron-down float-right"
@@ -34,15 +36,27 @@
             v-for="passenger in passengers"
             :key="passenger.name"
           >
-            <div class="name-container">
-              <p>
-                {{ passenger.name }}<span>{{ passenger.spam }}</span>
+            <div class="passenger-name-container">
+              <p class="passenger-name">
+                {{ passenger.name
+                }}<span class="passenger-spam">{{ passenger.spam }}</span>
               </p>
             </div>
             <div class="passenger-buttons">
-              <button @click="decrement(passenger)">-</button>
+              <button
+                :disabled="passenger.value === 0"
+                @click="decrement(passenger)"
+                class="passenger-button passenger-button--decrement"
+              >
+                -
+              </button>
               <span>{{ passenger.value }}</span>
-              <button @click="increment(passenger)">+</button>
+              <button
+                class="passenger-button passenger-button--increment"
+                @click="increment(passenger)"
+              >
+                +
+              </button>
             </div>
           </div>
         </div>
@@ -51,11 +65,13 @@
         v-model="bookingInfo.selectedTravelClass"
         name="travelClass"
         id="travelClass"
+        class="select"
       >
         <option
           v-for="travelClass in travelClasses"
           :key="travelClass.name"
           :value="travelClass.value"
+          class="option"
         >
           {{ travelClass.name }}
         </option>
@@ -99,7 +115,7 @@ export default {
         { name: 'Toddlers in own seat', spam: 'under 2', value: 0 },
         { name: 'Infants on lap', spam: 'under 2', value: 0 },
       ],
-      passengersSelected: '1 adult',
+      passengersSelected: 1,
     }
   },
   computed: {
@@ -109,6 +125,21 @@ export default {
         totalPassengers += passenger.value
       })
       return totalPassengers
+    },
+    passengersText() {
+      const total = this.totalPassengers
+      if (total === 1) {
+        const passenger = this.passengers.find((p) => p.value > 0)
+        if (passenger) {
+          const name = passenger.name.toLowerCase()
+          if (name === 'adults') {
+            return '1 adult'
+          } else {
+            return '1 child'
+          }
+        }
+      }
+      return `${total} travellers`
     },
     bookingInfo: {
       get() {
@@ -132,8 +163,15 @@ export default {
     decrement(passenger) {
       passenger.value--
     },
-    displayPassengerOptions() {
+    togglePassengerOptions() {
       this.showPassengerOptions = !this.showPassengerOptions
+      document.addEventListener('click', this.hidePassengerOptions)
+    },
+    hidePassengerOptions(event) {
+      if (!this.$el.contains(event.target)) {
+        this.showPassengerOptions = false
+        document.removeEventListener('click', this.hidePassengerOptions)
+      }
     },
   },
 }
@@ -143,7 +181,7 @@ export default {
 .selects-container {
   display: flex;
   gap: 10px;
-  select {
+  .select {
     border: 0;
   }
 }
@@ -171,7 +209,7 @@ export default {
       display: flex;
 
       .passenger-buttons {
-        button {
+        .passenger-button {
           border-radius: 5px;
           border: 1px solid #9ba8b0;
         }
@@ -179,9 +217,9 @@ export default {
           margin: 0 5px;
         }
       }
-      .name-container {
+      .passenger-name-container {
         width: 200px;
-        span {
+        .passenger-spam {
           font-size: 10px;
           margin-left: 5px;
         }
