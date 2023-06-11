@@ -35,41 +35,37 @@
     </div>
 
     <div class="dates-container d-flex mb-2">
-      <div class="input-group d-flex dates">
-        <div class="input-group date departure-date">
-          <div class="input-group-prepend">
-            <span class="input-group-text"
-              ><i class="fas fa-calendar"></i
-            ></span>
-          </div>
-          <input
-            type="date"
-            v-model="bookingInfo.departureDate"
-            class="form-control input-group__input"
-            id="departure-date"
-          />
+      <!-- <div class="input-group d-flex dates"> -->
+      <div class="input-group date departure-date">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
         </div>
-        <span
-          v-if="!(bookingInfo.selectedFlightType === 'one-way')"
-          class="separator"
-        ></span>
-        <div
-          v-if="!(bookingInfo.selectedFlightType === 'one-way')"
-          class="input-group date return-date"
-        >
-          <div class="input-group-prepend">
-            <span class="input-group-text"
-              ><i class="fas fa-calendar"></i
-            ></span>
-          </div>
-          <input
-            v-model="bookingInfo.returnDate"
-            type="date"
-            class="form-control input-group__input"
-            id="return-date"
-          />
-        </div>
+        <input
+          type="date"
+          v-model="bookingInfo.departureDate"
+          class="form-control input-group__input"
+          id="departure-date"
+        />
       </div>
+      <span
+        v-if="!(bookingInfo.selectedFlightType === 'one-way')"
+        class="separator"
+      ></span>
+      <div
+        v-if="!(bookingInfo.selectedFlightType === 'one-way')"
+        class="input-group date return-date"
+      >
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+        </div>
+        <input
+          v-model="bookingInfo.returnDate"
+          type="date"
+          class="form-control input-group__input"
+          id="return-date"
+        />
+      </div>
+      <!-- </div> -->
     </div>
 
     <div class="search-button-container">
@@ -151,9 +147,15 @@ export default {
 }
 .dates-container {
   width: 45%;
-  gap: 10px;
+  position: relative;
+
   .separator {
-    border: 2px solid #b9bbbd;
+    position: absolute;
+    height: 36px;
+    left: 50.6%;
+    top: 9px;
+    border: 1px solid #d2d3d5;
+    z-index: 100;
   }
 }
 .dates .date {
